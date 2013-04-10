@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
@@ -10,7 +9,7 @@ namespace BusRestAdapter.Controllers
 {
     public class VehicleLocationsController : ApiController
     {
-        private const string _rootUrl = "http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a={0}&r={1}&t={2}";
+        private const string RootUrl = "http://webservices.nextbus.com/service/publicXMLFeed?command=vehicleLocations&a={0}&r={1}&t={2}";
 
         // GET api/values
         public IEnumerable<VehicleLocation> Get()
@@ -21,7 +20,7 @@ namespace BusRestAdapter.Controllers
         // GET api/values/5
         public IEnumerable<VehicleLocation> Get(string agency, string route)
         {
-            var url = string.Format(_rootUrl, agency, route, 0);
+            var url = string.Format(RootUrl, agency, route, 0);
             var request = WebRequest.Create(url);
             using (var response = request.GetResponse())
             using (var stream = response.GetResponseStream())

@@ -13,12 +13,11 @@ namespace BusDataLogger
         public string DirTag { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
-        public int SecondsSinceLastReport { get; set; }
-        public bool Predictible { get; set; }
-        public short Heading { get; set; }
+        public string SecondsSinceLastReport { get; set; }
+        public string Predictible { get; set; }
+        public string Heading { get; set; }
+        public string Speed { get; set; }
     }
-
-    public class VehicleLocations : List<VehicleLocation> { }
 
     class Program
     {
@@ -38,7 +37,7 @@ namespace BusDataLogger
 
             while (true)
             {
-                var data = client.Execute<VehicleLocations>(request);
+                var data = client.Execute<List<VehicleLocation>>(request);
                 Console.WriteLine("Retrieved {0} records from system. Logging", data.Data.Count);
 
                 using (var writer = new StreamWriter(File.Open("busdata.txt", FileMode.Append)))
