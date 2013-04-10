@@ -1,0 +1,10 @@
+syntax: glob
+packages/
+bin/
+debug/
+*.suo
+*.user
+*.ncrunchsolution
+obj/
+*.dotsettings
+*.DotSettings
