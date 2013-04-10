@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
@@ -35,13 +36,16 @@ namespace BusRestAdapter.Controllers
 
         private static VehicleLocation CreateVehicleLocationObject(XElement arg)
         {
-            var result = new VehicleLocation
-                {
-                    Id = arg.Attribute("id").Value,
-                    Latitude = arg.Attribute("lat").Value,
-                    Longitude = arg.Attribute("lon").Value,
-                    RouteTag = arg.Attribute("routeTag").Value
-                };
+            var result = new VehicleLocation();
+            result.Id = arg.Attribute("id").Value;
+            result.RouteTag = arg.Attribute("routeTag").Value;
+            result.DirTag = arg.Attribute("dirTag") != null ? arg.Attribute("dirTag").Value : string.Empty;
+            result.Latitude = arg.Attribute("lat").Value;
+            result.Longitude = arg.Attribute("lon").Value;
+            result.SecondsSinceLastReport = arg.Attribute("secsSinceReport").Value;
+            result.Predictible = arg.Attribute("predictable").Value;
+            result.Heading = arg.Attribute("heading").Value;
+            result.Speed = arg.Attribute("speedKmHr").Value;
             return result;
         }
 

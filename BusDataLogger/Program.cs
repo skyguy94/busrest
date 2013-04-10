@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using RestSharp;
@@ -23,11 +22,15 @@ namespace BusDataLogger
 
     class Program
     {
+#if DEBUG
+        private const string BaseUrl = "http://localhost:18675/api/";
+#else
         private const string BaseUrl = "http://busrest1.apphb.com/api/";
-        
+#endif
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Console Started On:" + System.DateTime.Now);
+            Console.WriteLine("Console Started On:" + DateTime.Now);
             var client = new RestClient(BaseUrl);
             var request = new RestRequest("VehicleLocations/{agency}/{route}");
             request.AddParameter("agency", "sf-muni");
@@ -42,7 +45,7 @@ namespace BusDataLogger
                 {
                     foreach (var bus in data.Data)
                     {
-                        writer.WriteLine("{0},{1},{2},{3},{4},{5}", System.DateTime.Now, bus.Id, bus.Latitude, bus.Longitude, bus.Heading, bus.SecondsSinceLastReport);
+                        writer.WriteLine("{0},{1},{2},{3},{4},{5}", DateTime.Now, bus.Id, bus.Latitude, bus.Longitude, bus.Heading, bus.SecondsSinceLastReport);
                     }
                 }
                 Thread.Sleep(30*1000);
