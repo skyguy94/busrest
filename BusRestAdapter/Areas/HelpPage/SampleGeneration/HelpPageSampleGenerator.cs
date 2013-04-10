@@ -10,8 +10,10 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
+using System.Xml;
 using System.Xml.Linq;
 using Newtonsoft.Json;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace BusRestAdapter.Areas.HelpPage
 {
@@ -306,7 +308,7 @@ namespace BusRestAdapter.Areas.HelpPage
             try
             {
                 object parsedJson = JsonConvert.DeserializeObject(str);
-                return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+                return JsonConvert.SerializeObject(parsedJson, Newtonsoft.Json.Formatting.Indented);
             }
             catch
             {

@@ -7,7 +7,7 @@ namespace BusDataLogger
         static void Main(string[] args)
         {
             var client = new RestClient("http");
-            client.C
+            //client.Js
         }
     }
 }
